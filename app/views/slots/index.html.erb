@@ -1,0 +1,20 @@
+<div>
+  <div class="form-control">
+    <%= form_tag '/slots', method: 'GET', remote: true do %>
+      <%= label_tag(:date, "Select Date:") %>
+      <%= date_field_tag(:date, :stated_date, min: Date.today) %>
+      <%= label_tag(:duration, "Select Duration (in mins):") %>
+      <%= text_field_tag(:duration) %>
+      <%= button_tag('search') %>
+    <% end %>
+  </div><br>
+</div>
+
+<div>
+  <% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
+  <% end %>
+</div>
+
