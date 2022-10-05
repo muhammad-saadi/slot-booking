@@ -10,7 +10,7 @@ class Slot < ApplicationRecord
       booked_slots.each do |slot|
         duration_between_slots = ((slot[0] - start_time)/1.minutes).to_i
         available_slots = empty_slots(available_slots, start_time, slot[0], duration_between_slots, duration)
-        tart_time = slot[1]
+        start_time = slot[1]
       end
 
       duration_between_slots = (((selected_date.end_of_day - start_time.to_datetime)*24*60).to_i)
