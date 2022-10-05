@@ -1,20 +1,21 @@
-<div>
-  <div class="form-control">
-    <%= form_tag '/slots', method: 'GET', remote: true do %>
-      <%= label_tag(:date, "Select Date:") %>
-      <%= date_field_tag(:date, :stated_date, min: Date.today) %>
-      <%= label_tag(:duration, "Select Duration (in mins):") %>
-      <%= text_field_tag(:duration) %>
-      <%= button_tag('search') %>
+<div class="py-5 pe-5 bg-body ">
+  <div class='text-center bg-light'>
+    <% flash.each do |key, value| %>
+      <%= content_tag :div, value, class: "m-1 p-3 alert flash alert-success", role: "alert" %>
+    <% end %>
+  </div>
+
+  <div class="text-center mb-5 pt-5">
+    <%= form_with url: '/slots' do |f|  %>
+      <%= f.label :date, "Select Date:", class: 'm-4' %>
+      <%= f.date_field :date, min: Date.today %><br>
+      <%= f.label :duration, "Enter Duration (in mins):", class: 'm-4' %>
+      <%= f.text_field :duration %><br>
+      <%= button_tag 'search', class: 'check-slot btn btn-secondary btn-sm m-4' %>
+
+      <div class='available-slots'>
+        <%= render 'available_slots', slot: @available_slots %>
+      </div>
     <% end %>
   </div><br>
 </div>
-
-<div>
-  <% flash.each do |type, msg| %>
-    <div>
-      <%= msg %>
-    </div>
-  <% end %>
-</div>
-

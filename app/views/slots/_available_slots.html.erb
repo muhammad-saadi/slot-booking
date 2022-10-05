@@ -1,0 +1,10 @@
+<% if @available_slots.present? %>
+  <%= fields_for Slot.new do |f| %>
+    <%= f.select :start, options_for_select(@available_slots.to_a.insert(0, "Select Slot"))%>
+    <%= f.submit 'book slot', method: :post, class: 'btn btn-outline-secondary btn-sm' %>
+  <% end %>
+<% elsif(params[:date].present?) %>
+  <p>
+    Slots Unavailabe for <%= params[:date] %>
+  </p>
+<% end %>
