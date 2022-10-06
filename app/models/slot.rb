@@ -1,4 +1,6 @@
 class Slot < ApplicationRecord
+  validates_presence_of :start, message: 'Slot must be present'
+
   def self.available_slots(selected_date, duration)
     if selected_date.present? && duration.present?
       selected_date = selected_date.to_datetime
@@ -24,7 +26,7 @@ class Slot < ApplicationRecord
     if duration_between_slots >= duration
       counter = 0
 
-      while(start_time + (15*counter +duration).minutes < end_time)
+      while(start_time + (15*counter +duration).minutes <= end_time)
         available_slots.push("#{(start_time + (15*counter).minutes).strftime("%H:%M")} - #{(start_time + (15*counter +duration).minutes).strftime("%H:%M")}")
         counter+=1
       end

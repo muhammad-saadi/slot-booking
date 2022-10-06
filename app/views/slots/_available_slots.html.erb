@@ -1,8 +1,11 @@
 <% if @available_slots.present? %>
   <%= fields_for Slot.new do |f| %>
-    <%= f.select :start, options_for_select(@available_slots.to_a.insert(0, "Select Slot"))%>
+    <%= f.select :start, options_for_select(@available_slots), include_blank: true %>
     <%= f.submit 'book slot', method: :post, class: 'btn btn-outline-secondary btn-sm' %>
   <% end %>
+<% elsif @slot&.errors.present? %>
+  <p class="text-danger flash"><%= @slot.errors.messages[:start]&.to_sentence %></p>
+
 <% elsif(params[:date].present?) %>
   <p>
     Slots Unavailabe for <%= params[:date] %>
